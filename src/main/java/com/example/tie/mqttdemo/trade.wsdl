@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="trade"
+  targetNamespace="http://172.18.15.7:8090/trade.wsdl"
+  xmlns:tns="http://172.18.15.7:8090/trade.wsdl"
+  xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:ns="urn:trade"
+  xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:HTTP="http://schemas.xmlsoap.org/wsdl/http/"
+  xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/"
+  xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/"
+  xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/"
+  xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+<types>
+
+  <schema targetNamespace="urn:trade"
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ns="urn:trade"
+    xmlns="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="unqualified"
+    attributeFormDefault="unqualified">
+    <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+    <!-- operation request element -->
+    <element name="trade">
+      <complexType>
+          <sequence>
+            <element name="request" type="xsd:string" minOccurs="1" maxOccurs="1"/><!-- ns__trade::request -->
+          </sequence>
+      </complexType>
+    </element>
+    <!-- operation response element -->
+    <element name="tradeResponse">
+      <complexType>
+          <sequence>
+            <element name="result" type="xsd:string" minOccurs="0" maxOccurs="1"/><!-- ns__trade::result -->
+          </sequence>
+      </complexType>
+    </element>
+  </schema>
+
+</types>
+
+<message name="tradeRequest">
+  <part name="Body" element="ns:trade"/><!-- ns__trade::ns__trade -->
+</message>
+
+<message name="tradeResponse">
+  <part name="Body" element="ns:tradeResponse"/>
+</message>
+
+<portType name="tradePortType">
+  <operation name="trade">
+    <documentation>Service definition of function ns__trade</documentation>
+    <input message="tns:tradeRequest"/>
+    <output message="tns:tradeResponse"/>
+  </operation>
+</portType>
+
+<binding name="trade" type="tns:tradePortType">
+  <SOAP:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="trade">
+    <SOAP:operation soapAction=""/>
+    <input>
+          <SOAP:body parts="Body" use="literal"/>
+    </input>
+    <output>
+          <SOAP:body parts="Body" use="literal"/>
+    </output>
+  </operation>
+</binding>
+
+<service name="trade">
+  <documentation>gSOAP 2.8.45 generated service definition</documentation>
+  <port name="trade" binding="tns:trade">
+    <SOAP:address location="http://172.18.15.7:8090/trade.cgi"/>
+  </port>
+</service>
+
+</definitions>
